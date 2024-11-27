@@ -29,7 +29,7 @@ const Home = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Equipmen
+                        Equipment
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control type="number"/>

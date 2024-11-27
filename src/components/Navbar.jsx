@@ -9,6 +9,9 @@ const Navbar = () => {
             <Nav.Link >Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
+            <Nav.Link >Add Expenses</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
             <Nav.Link >Metrics</Nav.Link>
         </Nav.Item>
     </Nav>
