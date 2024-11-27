@@ -1,5 +1,12 @@
 # React Expenses App
 
+# Tech Stack
+
+In this project will be using:
+1) Bootstrap framework
+2) Mysql for database
+3) Scss for styling
+
 ## To Do:
 
 * Budget

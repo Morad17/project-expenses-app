@@ -1,0 +1,28 @@
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.home-navbar{
+    background-color: rgb(112, 112, 183);
+    font-size: 30px;
+    color: white;
+    a{
+        text-decoration: none;
+        color: white;
+    }
+    .nav-item:hover{
+        background-color:rgba(35, 35, 55, 0.7);
+        a{
+            color: rgb(143, 53, 53);
+        }
+    }
+    
+}
+.home{
+    .intro{
+        padding: 1vh 0;
+        justify-content: center;
+        text-align: center;
+    }
+}

@@ -1,8 +1,17 @@
-import React from 'react'
+import Nav from 'react-bootstrap/Nav'
+
+
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <Nav justify className="home-navbar" fill variant="tabs" defaultActiveKey="/home">  
+        <Nav.Item>
+            <Nav.Link >Home</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link >Metrics</Nav.Link>
+        </Nav.Item>
+    </Nav>
   )
 }
 

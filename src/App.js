@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import { Navbar } from 'react-bootstrap';
+import './assets/scss/base.scss'
+
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 
 function App() {
