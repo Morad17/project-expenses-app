@@ -5,13 +5,13 @@ import axios from 'axios'
 const AddExpenses = () => {
 
     const [expense, setExpense ] = useState({
-        venue_cost:0,
-        equipment_cost: 0,
-        performer_cost: 0,
-        staff_cost: 0,
-        managerial_cost: 0,
-        marketing_cost: 0,
-        utility_cost: 0,
+        venue:0,
+        equipment: 0,
+        performers: 0,
+        staff: 0,
+        managerial: 0,
+        marketing: 0,
+        utility: 0,
     })
 
     const handleChange = (e) => {
@@ -19,7 +19,7 @@ const AddExpenses = () => {
     }
 
     const submit = async (e) => {
-        console.log(typeof expense.venue_cost)
+        console.log(expense)
         e.preventDefault()
         try{
             await axios.post("http://localhost:8000/add-expenses", expense)
@@ -41,7 +41,7 @@ const AddExpenses = () => {
                         Venue
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="venue_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="venue" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -49,7 +49,7 @@ const AddExpenses = () => {
                         Equipment
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="equipment_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="equipment" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -57,7 +57,7 @@ const AddExpenses = () => {
                         Performers
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="performer_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="performers" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -65,7 +65,7 @@ const AddExpenses = () => {
                         Staff
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="staff_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="staff" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -73,7 +73,7 @@ const AddExpenses = () => {
                         Managerial
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="managerial_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="managerial" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -81,7 +81,7 @@ const AddExpenses = () => {
                         Marketing
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="marketing_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="marketing" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
@@ -89,7 +89,7 @@ const AddExpenses = () => {
                         Utility
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="utility_cost" type="number" onChange={handleChange} required/>
+                    <Form.Control name="utility" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Col className="justify-content-center">
@@ -104,7 +104,7 @@ const AddExpenses = () => {
         <Row className="intro justify-content-center text-center m-4" >
             <h3>Your Total Budget For the Project is</h3>
             <Col xs="8" className="">
-                <h3>{expense.venue_cost}</h3>
+                <h3>{expense.venue}</h3>
             </Col>
         </Row>
     </Container>

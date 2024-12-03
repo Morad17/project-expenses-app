@@ -20,19 +20,23 @@ const mdb = mysql.createConnection({
 
 // Send Expected Budget //
 app.post("/add-expenses", (req,res) => {
-    const q = "INSERT INTO budget (`venue_cost`,`equipment_cost, `performer_cost`, `staff_cost`, `managerial_cost`, `marketing_cost`, `utility_cost` ) VALUES (?)"
+    const q = "INSERT INTO budget (`venue`,`equipment`, `performers`, `staff`, `managerial`, `marketing`, `utility`,`total` ) VALUES (?)"
     const val = [
-        req.body.venue_cost,
-        req.body.equipment_cost,
-        req.body.performer_cost,
-        req.body.staff_cost,
-        req.body.managerial_cost,
-        req.body.marketing_cost,
-        req.body.utility_cost,
+        req.body.venue,
+        req.body.equipment,
+        req.body.performers,
+        req.body.staff,
+        req.body.managerial,
+        req.body.marketing,
+        req.body.utility,
+        10
     ]
     mdb.query(q, [val], (err, data) => {
         if(err) return res.json(err)
-        return res.json("success")
+        else{
+            return res.json("success")
+        }
+        
     })
 })
 
