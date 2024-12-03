@@ -54,7 +54,7 @@ const AddExpenses = () => {
             <Form onSubmit={submit}>
                 <Form.Group  className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Venue
+                        Venue (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="venue" type="number" onChange={handleChange} required/>
@@ -62,7 +62,7 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Equipment
+                        Equipment (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="equipment" type="number" onChange={handleChange} required/>
@@ -70,7 +70,7 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Performers
+                        Performers (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="performers" type="number" onChange={handleChange} required/>
@@ -78,7 +78,7 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Staff
+                        Staff (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="staff" type="number" onChange={handleChange} required/>
@@ -86,15 +86,15 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Managerial
+                        Managerial (£)
                     </Form.Label>
-                    <Col sm="5">
+                    <Col sm="5"><span></span>
                     <Form.Control name="managerial" type="number" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Marketing
+                        Marketing (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="marketing" type="number" onChange={handleChange} required/>
@@ -102,7 +102,7 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Utility
+                        Utility (£)
                     </Form.Label>
                     <Col sm="5">
                     <Form.Control name="utility" type="number" onChange={handleChange} required/>
@@ -110,7 +110,7 @@ const AddExpenses = () => {
                 </Form.Group>
                 <Col className="justify-content-center">
                     <Button variant="secondary" className="mt-2" type="submit">
-                    Submit
+                    Submit 
                     </Button>   
                 </Col>
                 
@@ -120,7 +120,7 @@ const AddExpenses = () => {
         <Row className="intro justify-content-center text-center m-4" >
             <h3>Your Total Budget For the Project is</h3>
             <Col xs="8" className="">
-                <h3>{total}</h3>
+                <h3>£{total}</h3>
             </Col>
         </Row>
     </Container>

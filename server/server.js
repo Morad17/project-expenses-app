@@ -18,9 +18,33 @@ const mdb = mysql.createConnection({
     database: process.env.MYSQL_DATABASE, 
 })
 
+// Get Budget //
+
+app.get("/get-budget", (req,res) => {
+    const q = "SELECT * FROM budget WHERE id = 1"
+    mdb.query(q, (err,data) => {
+        if (err) return res.json(err)
+        else {
+            return res.json(data)
+        }
+    })
+})
+
+// Get Expenses //
+
+app.get("/get-expenses", (req,res) => {
+    const q = "SELECT * FROM newexpenses WHERE id = 1"
+    mdb.query(q, (err,data) => {
+        if (err) return res.json(err)
+        else {
+            return res.json(data)
+        }
+    })
+})
+
 // Send Expected Budget //
 app.put("/add-expenses", (req,res) => {
-    const q = "UPDATE budget SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = ?"
+    const q = "UPDATE budget SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = 1"
     const val = [
         req.body.venue,
         req.body.equipment,
@@ -31,7 +55,7 @@ app.put("/add-expenses", (req,res) => {
         req.body.utility,
         10
     ]
-    mdb.query(q, [...val, 1], (err, data) => {
+    mdb.query(q, [...val], (err, data) => {
         if(err) return res.json(err)
         else{
             return res.json("success")
