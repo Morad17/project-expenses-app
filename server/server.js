@@ -19,8 +19,8 @@ const mdb = mysql.createConnection({
 })
 
 // Send Expected Budget //
-app.post("/add-expenses", (req,res) => {
-    const q = "INSERT INTO budget (`venue`,`equipment`, `performers`, `staff`, `managerial`, `marketing`, `utility`,`total` ) VALUES (?)"
+app.put("/add-expenses", (req,res) => {
+    const q = "UPDATE budget SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = ?"
     const val = [
         req.body.venue,
         req.body.equipment,
@@ -31,7 +31,7 @@ app.post("/add-expenses", (req,res) => {
         req.body.utility,
         10
     ]
-    mdb.query(q, [val], (err, data) => {
+    mdb.query(q, [...val, 1], (err, data) => {
         if(err) return res.json(err)
         else{
             return res.json("success")

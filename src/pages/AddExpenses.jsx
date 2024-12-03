@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -14,15 +14,31 @@ const AddExpenses = () => {
         utility: 0,
     })
 
+    const [total, setTotal] = useState(0)
+    useEffect(()=>{
+        const values = Object.values(expense)
+        let newTotal = 0
+        values.forEach((n)=> {
+            newTotal += Number(n)
+        })
+       setTotal(newTotal)
+        console.log(total)
+    },[expense])
+
     const handleChange = (e) => {
+
+        
         setExpense(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
+
+       
     }
+   
 
     const submit = async (e) => {
         console.log(expense)
         e.preventDefault()
         try{
-            await axios.post("http://localhost:8000/add-expenses", expense)
+            await axios.put("http://localhost:8000/add-expenses", expense)
             console.log(expense+"sent")
         } catch(err) {
             console.log(err)
@@ -104,7 +120,7 @@ const AddExpenses = () => {
         <Row className="intro justify-content-center text-center m-4" >
             <h3>Your Total Budget For the Project is</h3>
             <Col xs="8" className="">
-                <h3>{expense.venue}</h3>
+                <h3>{total}</h3>
             </Col>
         </Row>
     </Container>
