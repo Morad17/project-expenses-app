@@ -28,7 +28,7 @@ const AddBudget = () => {
         })
        setTotal(newTotal)
         console.log(total)
-    },[budget])
+    },[budget, total])
 
     const handleChange = (e) => {
         setBudget(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
