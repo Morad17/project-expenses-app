@@ -81,6 +81,23 @@ const Home = () => {
       <Row >
         <h1 className="home-title mt-4 mb-4">Expense Tracker</h1>
       </Row>
+      <Row className="justify-content-center">
+        <Col className="intro-paragraph" xs={12} md={5}>
+        <p>
+          Track all your expenses for a project in one app! This app will
+          help show you your current budget, your running expenses, and allow you
+          to constantly update your expenses as you are planning your Event, to ensure
+          you keep to your budget.
+        </p>
+        </Col>
+        <Col className="intro-paragraph" xs={12} md={5}>
+          <p>
+            To get started Click Add Budget to set your budget and return to home
+            to keep track of your expenses
+          </p>
+          <Button className="secondary">Add Budget</Button>
+        </Col>
+      </Row>
       <Row >
         <Col className="budget-column text-center p-4" xs={12} lg={4}>
           <h3>Budget</h3>
