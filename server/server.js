@@ -53,7 +53,29 @@ app.put("/add-budget", (req,res) => {
         req.body.managerial,
         req.body.marketing,
         req.body.utility,
-        10
+        0
+    ]
+    mdb.query(q, [...val], (err, data) => {
+        if(err) return res.json(err)
+        else{
+            return res.json("success")
+        }
+        
+    })
+})
+
+// Update Expenses //
+app.put("/new-expenses", (req,res) => {
+    const q = "UPDATE newexpenses SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = 1"
+    const val = [
+        req.body.venue,
+        req.body.equipment,
+        req.body.performers,
+        req.body.staff,
+        req.body.managerial,
+        req.body.marketing,
+        req.body.utility,
+        0
     ]
     mdb.query(q, [...val], (err, data) => {
         if(err) return res.json(err)

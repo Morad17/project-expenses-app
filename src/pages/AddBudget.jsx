@@ -13,6 +13,7 @@ const AddBudget = () => {
         managerial: 0,
         marketing: 0,
         utility: 0,
+        total: 0
     })
  const [total, setTotal] = useState(0)
 
@@ -35,7 +36,6 @@ const AddBudget = () => {
    
 
     const submit = async (e) => {
-        console.log(budget)
         e.preventDefault()
         try{
             await axios.put("http://localhost:8000/add-budget", budget)
