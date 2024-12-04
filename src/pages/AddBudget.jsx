@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import axios from 'axios'
+import { useNavigate } from 'react-router'
 
-const AddExpenses = () => {
+const AddBudget = () => {
 
-    const [expense, setExpense ] = useState({
+    const [budget, setBudget ] = useState({
         venue:0,
         equipment: 0,
         performers: 0,
@@ -13,33 +14,42 @@ const AddExpenses = () => {
         marketing: 0,
         utility: 0,
     })
+ const [total, setTotal] = useState(0)
 
-    const [total, setTotal] = useState(0)
+    const navigate = useNavigate()
+
+    // Set Total Budgets //
     useEffect(()=>{
-        const values = Object.values(expense)
+        const values = Object.values(budget)
         let newTotal = 0
         values.forEach((n)=> {
             newTotal += Number(n)
         })
        setTotal(newTotal)
         console.log(total)
-    },[expense])
+    },[budget])
 
     const handleChange = (e) => {
-
-        
-        setExpense(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
-
-       
+        setBudget(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
     }
    
 
     const submit = async (e) => {
-        console.log(expense)
+        console.log(budget)
         e.preventDefault()
         try{
-            await axios.put("http://localhost:8000/add-expenses", expense)
-            console.log(expense+"sent")
+            await axios.put("http://localhost:8000/add-budget", budget)
+            console.log(budget+"sent")
+        } catch(err) {
+            console.log(err)
+        }
+    }
+    // Reset All Budgets //
+    const resetBudget = async () => {
+        try{
+            await axios.put("http://localhost:8000/reset-budget")
+            console.log("reset Success")
+            navigate(0)
         } catch(err) {
             console.log(err)
         }
@@ -47,9 +57,9 @@ const AddExpenses = () => {
 
   return (
     
-    <Container className="home" >
-        <Row className="expenses">
-            <h1>Expenses</h1>
+    <Container className="budget" >
+        <Row className="">
+            <h1>Forcaseted Budget</h1>
             <h3>Please Fill in all expected expenses for the Project</h3>
             <Form onSubmit={submit}>
                 <Form.Group  className="mt-2 justify-content-center"as={Row}>
@@ -123,8 +133,17 @@ const AddExpenses = () => {
                 <h3>£{total}</h3>
             </Col>
         </Row>
+        <Row>
+            <Col>
+                <h3>Reset All Budgets</h3>
+                <Button variant="secondary" className="mt-2" type="submit" onClick={resetBudget}>
+                    Reset
+                </Button>
+            </Col>
+        </Row>
+
     </Container>
   )
 }
 
-export default AddExpenses
+export default AddBudget

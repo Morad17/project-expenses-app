@@ -2,8 +2,8 @@ import {Outlet, createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './assets/scss/base.scss'
 
 import Navbar from './components/Navbar';
-import AddExpenses from './pages/AddExpenses';
 import Home from './pages/Home';
+import AddBudget from './pages/AddBudget';
 
 function App() {
 
@@ -27,8 +27,8 @@ function App() {
   
       },
       {
-        path: "/add-expenses",
-        element: <AddExpenses />
+        path: "/add-budget",
+        element: <AddBudget />
       },
     ]
     }

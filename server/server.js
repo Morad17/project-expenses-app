@@ -43,7 +43,7 @@ app.get("/get-expenses", (req,res) => {
 })
 
 // Send Expected Budget //
-app.put("/add-expenses", (req,res) => {
+app.put("/add-budget", (req,res) => {
     const q = "UPDATE budget SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = 1"
     const val = [
         req.body.venue,
@@ -56,6 +56,19 @@ app.put("/add-expenses", (req,res) => {
         10
     ]
     mdb.query(q, [...val], (err, data) => {
+        if(err) return res.json(err)
+        else{
+            return res.json("success")
+        }
+        
+    })
+})
+
+// Reset Budget //
+
+app.put("/reset-budget", (req,res) => {
+    const q = "UPDATE budget SET `venue` = 0,`equipment`= 0, `performers`= 0, `staff`= 0, `managerial`= 0, `marketing`= 0, `utility`= 0,`total`= 0 WHERE id = 1"
+    mdb.query(q, (err, data) => {
         if(err) return res.json(err)
         else{
             return res.json("success")
