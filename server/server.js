@@ -12,10 +12,10 @@ app.use(cors())
 
 // Connect to Mysql Database //
 const mdb = mysql.createConnection({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE, 
+    host: process.env.RENDER_MYSQL_HOST,
+    user: process.env.RENDER_MYSQL_USERNAME,
+    password: process.env.RENDER_MYSQL_PASSWORD,
+    database: process.env.RENDER_MYSQL_DATABASE, 
 })
 
 // Get Budget //
@@ -102,8 +102,8 @@ app.put("/reset-budget", (req,res) => {
 
 
 // Port for Mysql //
-app.listen(process.env.MYSQL_PORT, () => {
-    console.log(`Connected to port ${process.env.MYSQL_PORT}`);
+app.listen(process.env.RENDER_MYSQL_PORT, () => {
+    console.log(`Connected to port ${process.env.RENDER_MYSQL_PORT}`);
 })
 
 // Test Connection to Mysql //
