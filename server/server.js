@@ -10,6 +10,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+const port = process.env.RENDER_MYSQL_PORT
+
 // Connect to Mysql Database //
 const mdb = mysql.createConnection({
     host: process.env.RENDER_MYSQL_HOST,
@@ -102,8 +104,8 @@ app.put("/reset-budget", (req,res) => {
 
 
 // Port for Mysql //
-app.listen(process.env.RENDER_MYSQL_PORT, () => {
-    console.log(`Connected to port ${process.env.RENDER_MYSQL_PORT}`);
+app.listen(port, () => {
+    console.log(`Connected to port ${port}`);
 })
 
 // Test Connection to Mysql //
