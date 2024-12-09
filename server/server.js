@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const port = 8000
+const port = process.env.PORT || 8000
 
 // Connect to Mysql Database //
 const mdb = mysql.createConnection({
