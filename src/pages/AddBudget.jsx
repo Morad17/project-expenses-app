@@ -38,7 +38,7 @@ const AddBudget = () => {
     const submit = async (e) => {
         e.preventDefault()
         try{
-            await axios.put("http://localhost:8000/add-budget", budget)
+            await axios.put("https://project-expenses-app.onrender.com/add-budget", budget)
             console.log(budget+"sent")
         } catch(err) {
             console.log(err)
@@ -47,7 +47,7 @@ const AddBudget = () => {
     // Reset All Budgets //
     const resetBudget = async () => {
         try{
-            await axios.put("http://localhost:8000/reset-budget")
+            await axios.put("https://project-expenses-app.onrender.com/reset-budget")
             console.log("reset Success")
             navigate(0)
         } catch(err) {

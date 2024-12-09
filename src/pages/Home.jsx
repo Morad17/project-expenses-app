@@ -24,7 +24,7 @@ const Home = () => {
   //Get Budget //
   const getBudget = async () => {
     try{
-      const res = await axios.get("http://localhost:8000/get-budget")
+      const res = await axios.get("https://project-expenses-app.onrender.com/get-budget")
       const data = res.data
       setBudget(data)
       const oldValues = data[0]
@@ -46,7 +46,7 @@ const Home = () => {
   // Get Expenses //
   const getExpenses = async () => {
     try{
-      const res = await axios.get("http://localhost:8000/get-expenses")
+      const res = await axios.get("https://project-expenses-app.onrender.com/get-expenses")
       const data = res.data
       setExpenses(data)
       console.log(data)
@@ -68,7 +68,7 @@ const Home = () => {
     console.log(budget)
     e.preventDefault()
     try{
-        await axios.put("http://localhost:8000/new-expenses", newExpenses)
+        await axios.put("https://project-expenses-app.onrender.com/new-expenses", newExpenses)
         console.log(newExpenses+"sent")
         navigate(0)
     } catch(err) {
