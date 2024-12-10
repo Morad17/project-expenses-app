@@ -14,10 +14,10 @@ const port = process.env.PORT || 8000
 
 // Connect to Mysql Database //
 const mdb = mysql.createConnection({
-    host: process.env.RENDER_MYSQL_HOST,
-    user: process.env.RENDER_MYSQL_USERNAME,
-    password: process.env.RENDER_MYSQL_PASSWORD,
-    database: process.env.RENDER_MYSQL_DATABASE, 
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE, 
 })
 
 // Get Budget //
@@ -105,7 +105,7 @@ app.put("/reset-budget", (req,res) => {
 
 // Port for Mysql //
 app.listen(port, () => {
-    console.log(`Connected to port ${port}`);
+    console.log(`Successfully Connected to port ${port}`);
 })
 
 // Test Connection to Mysql //
