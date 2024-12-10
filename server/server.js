@@ -109,10 +109,10 @@ app.listen(port, () => {
 })
 
 // Test Connection to Mysql //
-// mdb.query(`SELECT * from expenses`, (err, res) => {
-//     if (err) {
-//         return console.log(err)
-//     } else {
-//         return console.log(res + "success")
-//     }
-// })
+mdb.query(`SELECT * from expenses`, (err, res) => {
+    if (err) {
+        return console.log(err)
+    } else {
+        return console.log(res + "success")
+    }
+})
