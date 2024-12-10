@@ -106,6 +106,7 @@ app.put("/reset-budget", (req,res) => {
 // Port for Mysql //
 app.listen(port, () => {
     console.log(`Successfully Connected to port ${port}`);
+    console.log(`Test Success${process.env.TEST_ENV}`)
 })
 
 // Test Connection to Mysql //
