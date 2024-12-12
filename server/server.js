@@ -68,7 +68,7 @@ app.put("/add-budget", (req,res) => {
 
 // Update Expenses //
 app.put("/new-expenses", (req,res) => {
-    const q = "UPDATE newexpenses SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = 1"
+    const q = "UPDATE expenses SET `venue` = ?,`equipment`= ?, `performers`= ?, `staff`= ?, `managerial`= ?, `marketing`= ?, `utility`= ?,`total`= ? WHERE id = 1"
     const val = [
         req.body.venue,
         req.body.equipment,
@@ -106,14 +106,13 @@ app.put("/reset-budget", (req,res) => {
 // Port for Mysql //
 app.listen(port, () => {
     console.log(`Successfully Connected to port ${port}`);
-    console.log(`Test Success${process.env.TEST_ENV}`)
 })
 
-// Test Connection to Mysql //
-mdb.query(`SELECT * from expenses`, (err, res) => {
-    if (err) {
-        return console.log(err)
-    } else {
-        return console.log(res + "success")
-    }
-})
+// // Test Connection to Mysql //
+// mdb.query(`SELECT * from expenses`, (err, res) => {
+//     if (err) {
+//         return console.log(err)
+//     } else {
+//         return console.log(res + "success")
+//     }
+// })
