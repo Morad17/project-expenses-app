@@ -95,7 +95,7 @@ const Home = () => {
             To get started Click Add Budget to set your budget and return to home
             to keep track of your expenses
           </p>
-          <Button className="secondary">Add Budget</Button>
+          <Button href="/add-budget" className="secondary">Add Budget</Button>
         </Col>
       </Row>
       <Row >
