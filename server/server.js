@@ -35,7 +35,7 @@ app.get("/get-budget", (req,res) => {
 // Get Expenses //
 
 app.get("/get-expenses", (req,res) => {
-    const q = "SELECT * FROM newexpenses WHERE id = 1"
+    const q = "SELECT * FROM expenses WHERE id = 1"
     mdb.query(q, (err,data) => {
         if (err) return res.json(err)
         else {
