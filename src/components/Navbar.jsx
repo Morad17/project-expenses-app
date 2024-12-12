@@ -9,7 +9,7 @@ const Navbar = () => {
             <Nav.Link href="/" >Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-            <Nav.Link href="add-budget" >Add/Update Budget</Nav.Link>
+            <Nav.Link href="/add-budget" >Add/Update Budget</Nav.Link>
         </Nav.Item>
         <Nav.Item>
             <Nav.Link >Metrics</Nav.Link>

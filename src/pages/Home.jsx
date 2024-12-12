@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Table, Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 
 const Home = () => {
@@ -95,7 +95,7 @@ const Home = () => {
             To get started Click Add Budget to set your budget and return to home
             to keep track of your expenses
           </p>
-          <Button href="/add-budget" className="secondary">Add Budget</Button>
+          <Button href="/add-budget" className="secondary"><Nav.Link href="add-budget">Add Budget</Nav.Link></Button>
         </Col>
       </Row>
       <Row >
