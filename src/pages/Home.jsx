@@ -1,13 +1,22 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form, Button, Table, Nav } from 'react-bootstrap'
+import { ColorRing } from 'react-loader-spinner'
 import { useNavigate } from 'react-router'
+//Icons //
+import { MdStadium, MdHandyman } from "react-icons/md"
+import { FaTools } from "react-icons/fa"
+import { TfiMicrophoneAlt } from "react-icons/tfi"
+import { GrUserWorker, GrUserManager } from "react-icons/gr"
+import { RiAdvertisementFill, RiMoneyPoundCircleLine } from "react-icons/ri"
+
 
 const Home = () => {
 
   const [budget, setBudget] = useState()
   const [expenses, setExpenses] = useState()
-  const [total, setTotal] = useState(0)
+  const [totalBudget, setTotalBudget] = useState(0)
+  const [totalExpenses, setTotalExpenses] = useState(0)
 
   const [newExpenses, setNewExpenses ] = useState({
     venue:0,
@@ -25,17 +34,15 @@ const Home = () => {
   const getBudget = async () => {
     try{
       const res = await axios.get("https://project-expenses-app.onrender.com/get-budget")
-      const data = res.data
+      const data = res.data[0]
       setBudget(data)
-      const oldValues = data[0]
-      delete oldValues.id
-      const values = Object.values(oldValues)
+      delete data.id
+      const values = Object.values(data)
       let newTotal = 0
       values.forEach((n)=> {
           newTotal += Number(n)
       })
-      console.log(newTotal)
-      setTotal(newTotal)
+      setTotalBudget(newTotal)
     } catch(err){
       console.log(err)
     }
@@ -47,9 +54,15 @@ const Home = () => {
   const getExpenses = async () => {
     try{
       const res = await axios.get("https://project-expenses-app.onrender.com/get-expenses")
-      const data = res.data
+      const data = res.data[0]
       setExpenses(data)
-      console.log(data)
+      delete data.id
+      const values = Object.values(data)
+      let newTotal = 0
+      values.forEach((n)=> {
+        newTotal += Number(n)
+      })
+      setTotalExpenses(newTotal)
     } catch(err){
       console.log(err)
     }
@@ -65,11 +78,10 @@ const Home = () => {
     setNewExpenses(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
   }
   const submit = async (e) => {
-    console.log(budget)
     e.preventDefault()
     try{
         await axios.put("https://project-expenses-app.onrender.com/new-expenses", newExpenses)
-        console.log(newExpenses+"sent")
+        console.log("sent successfully")
         navigate(0)
     } catch(err) {
         console.log(err)
@@ -79,7 +91,7 @@ const Home = () => {
   return (
     <Container className="home justify-content-center" fluid>
       <Row >
-        <h1 className="home-title mt-4 mb-4">Expense Tracker</h1>
+        <h1 className="home-title mt-4 mb-4">Expense Tracker {}</h1>
       </Row>
       <Row className="justify-content-center">
         <Col className="intro-paragraph" xs={12} md={5}>
@@ -99,54 +111,76 @@ const Home = () => {
         </Col>
       </Row>
       <Row >
-        <Col className="budget-column text-center p-4" xs={12} lg={4}>
+        <Col className="budget-column text-center p-4" xs={12} lg={6}>
           <h3>Budget</h3>
           {
-            budget && budget.map((b)=> {
-              return <Table striped bordered hover>
+            budget && expenses ?
+              <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Category</th>
                     <th>Budget</th>
+                    <th>Category</th>
+                    <th>Running Expenses</th>
                   </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Venue</td>
-                    <td>£{b.venue}</td>
+                    <td>£{budget.venue}</td>
+                    <td><MdStadium className="icon"/> Venue</td>
+                    <td>£{expenses.venue}</td>
                   </tr>
                   <tr>
-                    <td>Equipment</td>
-                    <td>£{b.equipment}</td>
+                    <td>£{budget.equipment}</td>
+                    <td><FaTools className="icon"/>Equipment</td>
+                    <td>£{expenses.equipment}</td>
                   </tr>
                   <tr> 
-                    <td>Performers</td>
-                    <td>£{b.performers}</td>
+                    <td>£{budget.performers}</td>
+                    <td><TfiMicrophoneAlt className="icon"/>Performers</td>
+                    <td>£{expenses.performers}</td>
                   </tr>
                   <tr>
-                    <td>Staff</td>
-                    <td>£{b.staff}</td>
+                    <td>£{budget.staff}</td>
+                    <td><GrUserWorker className="icon"/>Staff</td>
+                    <td>£{expenses.staff}</td>
                   </tr>
                   <tr>
-                    <td>Managerial</td>
-                    <td>£{b.managerial}</td>
+                    <td>£{budget.managerial}</td>
+                    <td><GrUserManager className="icon"/> Managerial</td>
+                    <td>£{expenses.managerial}</td>
                   </tr>
                   <tr>
-                    <td>Marketing</td>
-                    <td>£{b.marketing}</td>
+                    <td>£{budget.marketing}</td>
+                    <td><RiAdvertisementFill className="icon"/>Marketing</td>
+                    <td>£{expenses.marketing}</td>
                   </tr>
                   <tr>  
-                    <td>Utility</td>
-                    <td>£{b.utility}</td>
+                    <td>£{budget.utility}</td>
+                    <td><MdHandyman className="icon"/>Utility</td>
+                    <td>£{expenses.utility}</td>
                   </tr>
-                  <tr>  
-                    <td>Total</td>
-                    <td>£{total}</td>
+                  <tr>
+                    <td>£{totalBudget}</td>  
+                    <td><RiMoneyPoundCircleLine className="icon"/> Total</td>
+                    <td>£{totalExpenses}</td>
                   </tr>
                     
                 </tbody>
               </Table>
-            })
+            : 
+            <Col>
+              <h2>Loading</h2>
+              <ColorRing
+                visible={true}
+                height="160"
+                width="160"
+                ariaLabel="color-ring-loading"
+                wrapperStyle={{}}
+                wrapperClass="color-ring-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                />
+            </Col>
+           
           }
         </Col>
         <Col className="update-expenses text-center p-4"  xs={12} lg={4}>
@@ -154,58 +188,58 @@ const Home = () => {
           <Form onSubmit={submit}>
                 <Form.Group  className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Venue (£)
+                      <MdStadium className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="venue" type="number" onChange={handleChange} required/>
+                    <Form.Control name="venue" type="number" placeholder="Venue" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Equipment (£)
+                      <FaTools className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="equipment" type="number" onChange={handleChange} required/>
+                    <Form.Control name="equipment" type="number" placeholder="Equipment"onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Performers (£)
+                      <TfiMicrophoneAlt className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="performers" type="number" onChange={handleChange} required/>
+                    <Form.Control name="performers" type="number" placeholder="Performers"onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Staff (£)
+                      <GrUserWorker className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="staff" type="number" onChange={handleChange} required/>
+                    <Form.Control name="staff" type="number" placeholder="Staff" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Managerial (£)
+                      <GrUserManager className="icon"/>
                     </Form.Label>
                     <Col sm="5"><span></span>
-                    <Form.Control name="managerial" type="number" onChange={handleChange} required/>
+                    <Form.Control name="managerial" type="number" placeholder="Managerial" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Marketing (£)
+                     <RiAdvertisementFill className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="marketing" type="number" onChange={handleChange} required/>
+                    <Form.Control name="marketing" type="number" placeholder="Marketing" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Form.Group className="mt-2 justify-content-center"as={Row}>
                     <Form.Label column sm="1">
-                        Utility (£)
+                      <MdHandyman className="icon"/>
                     </Form.Label>
                     <Col sm="5">
-                    <Form.Control name="utility" type="number" onChange={handleChange} required/>
+                    <Form.Control name="utility" type="number" placeholder="Utility" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
                 <Col className="justify-content-center">
@@ -215,52 +249,6 @@ const Home = () => {
                 </Col>
                 
             </Form>
-        </Col>
-        <Col className="current-expenses text-center p-4"  xs={12} lg={4}>
-          <h3>Current Expenses</h3>
-          {
-            expenses && expenses.map((e)=> {
-              return <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>Budget</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Venue</td>
-                    <td>£{e.venue}</td>
-                  </tr>
-                  <tr>
-                    <td>Equipment</td>
-                    <td>£{e.equipment}</td>
-                  </tr>
-                  <tr> 
-                    <td>Performers</td>
-                    <td>£{e.performers}</td>
-                  </tr>
-                  <tr>
-                    <td>Staff</td>
-                    <td>£{e.staff}</td>
-                  </tr>
-                  <tr>
-                    <td>Managerial</td>
-                    <td>£{e.managerial}</td>
-                  </tr>
-                  <tr>
-                    <td>Marketing</td>
-                    <td>£{e.marketing}</td>
-                  </tr>
-                  <tr>  
-                    <td>Utility</td>
-                    <td>£{e.utility}</td>
-                  </tr>
-                    
-                </tbody>
-              </Table>
-            })
-          }
         </Col>
       </Row>
     </Container>

@@ -39,7 +39,7 @@ const AddBudget = () => {
         e.preventDefault()
         try{
             await axios.put("https://project-expenses-app.onrender.com/add-budget", budget)
-            console.log(budget+"sent")
+            console.log("sent successfully")
         } catch(err) {
             console.log(err)
         }
