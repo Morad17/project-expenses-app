@@ -27,12 +27,12 @@ Deployment:
 - [x] Budget
 - [x] Mysql Database
 - [x] Expenses Blueprint
-- [] Create Sub Caregories
-- [] Full Styling
+- [ ] Create Sub Caregories
+- [ ] Full Styling
 
 ## Extra
 
-- [] Animation
-- [] Metrics
-- [] User Login
+- [ ] Animation
+- [ ] Metrics
+- [ ] User Login
 - [x] React Router Navigation 
