@@ -28,6 +28,7 @@ const Home = () => {
     utility: 0,
   })
 
+
   const navigate = useNavigate()
 
   //Get Budget //
@@ -111,55 +112,55 @@ const Home = () => {
         </Col>
       </Row>
       <Row >
-        <Col className="budget-column text-center p-4" xs={12} lg={6}>
+        <Col className="budget-table-container text-center p-4" xs={12} lg={5}>
           <h3>Budget</h3>
           {
             budget && expenses ?
-              <Table striped bordered hover>
+              <Table className="budget-table" bordered >
                 <thead>
-                  <tr>
-                    <th>Budget</th>
-                    <th>Category</th>
-                    <th>Running Expenses</th>
+                  <tr className="table-headings">
+                    <th className="budget-column">Budget</th>
+                    <th className="category-column">Category</th>
+                    <th className="expenses-column">Running Expenses</th>
                   </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr className="venue-row">
                     <td>£{budget.venue}</td>
                     <td><MdStadium className="icon"/> Venue</td>
                     <td>£{expenses.venue}</td>
                   </tr>
-                  <tr>
+                  <tr className="equipment-row">
                     <td>£{budget.equipment}</td>
                     <td><FaTools className="icon"/>Equipment</td>
                     <td>£{expenses.equipment}</td>
                   </tr>
-                  <tr> 
+                  <tr className="performers-row"> 
                     <td>£{budget.performers}</td>
                     <td><TfiMicrophoneAlt className="icon"/>Performers</td>
                     <td>£{expenses.performers}</td>
                   </tr>
-                  <tr>
+                  <tr className="staff-row">
                     <td>£{budget.staff}</td>
                     <td><GrUserWorker className="icon"/>Staff</td>
                     <td>£{expenses.staff}</td>
                   </tr>
-                  <tr>
+                  <tr className="managerial-row">
                     <td>£{budget.managerial}</td>
                     <td><GrUserManager className="icon"/> Managerial</td>
                     <td>£{expenses.managerial}</td>
                   </tr>
-                  <tr>
+                  <tr className="marketing-row">
                     <td>£{budget.marketing}</td>
                     <td><RiAdvertisementFill className="icon"/>Marketing</td>
                     <td>£{expenses.marketing}</td>
                   </tr>
-                  <tr>  
+                  <tr className="utility-row">  
                     <td>£{budget.utility}</td>
                     <td><MdHandyman className="icon"/>Utility</td>
                     <td>£{expenses.utility}</td>
                   </tr>
-                  <tr>
+                  <tr className="total-row">
                     <td>£{totalBudget}</td>  
                     <td><RiMoneyPoundCircleLine className="icon"/> Total</td>
                     <td>£{totalExpenses}</td>
@@ -186,59 +187,59 @@ const Home = () => {
         <Col className="update-expenses text-center p-4"  xs={12} lg={4}>
           <h3>Update Expenses</h3>
           <Form onSubmit={submit}>
-                <Form.Group  className="mt-2 justify-content-center"as={Row}>
+                <Form.Group  className="mt-2 form-group form-group-venue"as={Row}>
                     <Form.Label column sm="1">
                       <MdStadium className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col >
                     <Form.Control name="venue" type="number" placeholder="Venue" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-equipment"as={Row}>
                     <Form.Label column sm="1">
                       <FaTools className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col>
                     <Form.Control name="equipment" type="number" placeholder="Equipment"onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-performers"as={Row}>
                     <Form.Label column sm="1">
                       <TfiMicrophoneAlt className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col>
                     <Form.Control name="performers" type="number" placeholder="Performers"onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-staff"as={Row}>
                     <Form.Label column sm="1">
                       <GrUserWorker className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col >
                     <Form.Control name="staff" type="number" placeholder="Staff" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-managerial"as={Row}>
                     <Form.Label column sm="1">
                       <GrUserManager className="icon"/>
                     </Form.Label>
-                    <Col sm="5"><span></span>
+                    <Col>
                     <Form.Control name="managerial" type="number" placeholder="Managerial" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-marketing"as={Row}>
                     <Form.Label column sm="1">
                      <RiAdvertisementFill className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col >
                     <Form.Control name="marketing" type="number" placeholder="Marketing" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
+                <Form.Group className="mt-2 form-group form-group-utility"as={Row}>
                     <Form.Label column sm="1">
                       <MdHandyman className="icon"/>
                     </Form.Label>
-                    <Col sm="5">
+                    <Col >
                     <Form.Control name="utility" type="number" placeholder="Utility" onChange={handleChange} required/>
                     </Col>
                 </Form.Group>

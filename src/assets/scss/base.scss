@@ -1,3 +1,13 @@
+//variables//
+
+    $venue-color:#e1477e;
+    $equipment-color:#f7729c;
+    $performers-color:#2972b6;
+    $staff-color:#52bf89;
+    $managerial-color:#8cd6e4;
+    $marketing-color:#86494c;
+    $utility-color:	#f68527;
+    $total-color: #9c6fb4;
 body{
     box-sizing: border-box;
     margin: 0;
@@ -19,6 +29,7 @@ body{
     }
     
 }
+//Home//
 .home{
     .intro{
         padding: 1vh 0;
@@ -37,8 +48,109 @@ body{
         padding: 7px;
         margin: 5px;
     }
+    .budget-column{
+        width: 30%;
+    }
+    .expenses-column{
+        width: 30%;
+    }
+    .venue-row td{
+        background-color: $venue-color;
+    }
+    .equipment-row td{
+        background-color: $equipment-color;
+    }
+    .managerial-row td{
+        background-color: $managerial-color;
+    }
+    .staff-row td{
+        background-color: $staff-color;
+    }
+    .performers-row td{
+        background-color: $performers-color;
+    }
+    .marketing-row td{
+        background-color: $marketing-color;
+    }
+    .utility-row td{
+        background-color: $utility-color;
+    }
+    .total-row td{
+        background-color: $total-color;
+    }
+    tr:hover > td{
+        background-color:white ;
+    }
+    .table-headings th{
+        background-color: rgb(173, 149, 149);
+    }
+    .budget-table{
+        border: 2px solid gray;
+        border-radius: 10px;
+        overflow: hidden;
+       th,td{
+        font-size: 18px;
+        font-weight: 600;
+       } 
+    }
+    .form-group{
+        border: 2px solid gray;
+        border-radius: 10px;
+        text-align: start;
+        overflow: hidden;
+        label{
+            border-right: 2px solid;
+        }
+        input{
+            width: 100%;
+            padding: .5em;
+            border: none;
+            outline: none;
+        }
+        input:focus{
+            border-left: 2px solid gray;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            border: none;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+    }
+    
+    .form-group:hover, .form-group:hover input{
+        background-color: white;
+    }
+    // Color Background of each input //
+    .form-group-venue,.form-group-venue input{
+        background-color: $venue-color;
+    }
+    .form-group-equipment,.form-group-equipment input{
+        background-color: $equipment-color;
+    }
+    .form-group-performers,.form-group-performers input{
+        background-color: $performers-color;
+    }
+    .form-group-staff,.form-group-staff input{
+        background-color: $staff-color;
+    }
+    .form-group-managerial,.form-group-managerial input{
+        background-color: $managerial-color;
+    }
+    .form-group-marketing,.form-group-marketing input{
+        background-color: $marketing-color;
+    }
+    .form-group-utility,.form-group-utility input{
+        background-color: $utility-color;
+    }
 }
+
+
 
 .icon{
     font-size: 26px;
 }
+
