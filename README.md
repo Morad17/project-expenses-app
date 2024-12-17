@@ -24,15 +24,15 @@ Deployment:
 
 ## To Do:
 
-[x] Budget
-[x] Mysql Database
-[x] Expenses Blueprint
-[] Create Sub Caregories
-[] Full Styling
+- [x] Budget
+- [x] Mysql Database
+- [x] Expenses Blueprint
+- [] Create Sub Caregories
+- [] Full Styling
 
 ## Extra
 
-[] Animation
-[] Metrics
-[] User Login
-[x] React Router Navigation 
+- [] Animation
+- [] Metrics
+- [] User Login
+- [x] React Router Navigation 
