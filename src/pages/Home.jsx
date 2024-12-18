@@ -9,6 +9,8 @@ import { FaTools } from "react-icons/fa"
 import { TfiMicrophoneAlt } from "react-icons/tfi"
 import { GrUserWorker, GrUserManager } from "react-icons/gr"
 import { RiAdvertisementFill, RiMoneyPoundCircleLine } from "react-icons/ri"
+import { SiTicktick } from "react-icons/si";
+
 
 
 const Home = () => {
@@ -77,6 +79,9 @@ const Home = () => {
 
   const handleChange = (e) => {
     setNewExpenses(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
+    const catId = document.getElementById( e.target.name + '-tick')
+    console.log(catId)
+    catId.style.display = "block"
   }
   const submit = async (e) => {
     e.preventDefault()
@@ -87,14 +92,18 @@ const Home = () => {
     } catch(err) {
         console.log(err)
     }
-}
+  }
+
+  const inputTicked = () => {
+    return <SiTicktick className="tick-icon"/>
+  }
 
   return (
     <Container className="home justify-content-center" fluid>
       <Row >
         <h1 className="home-title mt-4 mb-4">Expense Tracker {}</h1>
       </Row>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center ">
         <Col className="intro-paragraph" xs={12} md={5}>
         <p>
           Track all your expenses for a project in one app! This app will
@@ -112,57 +121,57 @@ const Home = () => {
         </Col>
       </Row>
       <Row >
-        <Col className="budget-table-container text-center p-4" xs={12} lg={5}>
+        <Col className="budget-table-container p-4" xs={12} lg={5}>
           <h3>Budget</h3>
           {
             budget && expenses ?
-              <Table className="budget-table" bordered >
+              <Table className="budget-table text-center" bordered >
                 <thead>
                   <tr className="table-headings">
-                    <th className="budget-column">Budget</th>
+                    <th className="budget-column  text-center ">Budget</th>
                     <th className="category-column">Category</th>
-                    <th className="expenses-column">Running Expenses</th>
+                    <th className="expenses-column  text-center ">Running Expenses</th>
                   </tr>
                 </thead>
                 <tbody>
                 <tr className="venue-row">
                     <td>£{budget.venue}</td>
-                    <td><MdStadium className="icon"/> Venue</td>
+                    <td className="text-start"><MdStadium className="icon"/> Venue</td>
                     <td>£{expenses.venue}</td>
                   </tr>
                   <tr className="equipment-row">
                     <td>£{budget.equipment}</td>
-                    <td><FaTools className="icon"/>Equipment</td>
+                    <td className="text-start"><FaTools className="icon"/>Equipment</td>
                     <td>£{expenses.equipment}</td>
                   </tr>
                   <tr className="performers-row"> 
                     <td>£{budget.performers}</td>
-                    <td><TfiMicrophoneAlt className="icon"/>Performers</td>
+                    <td className="text-start"><TfiMicrophoneAlt className="icon"/>Performers</td>
                     <td>£{expenses.performers}</td>
                   </tr>
                   <tr className="staff-row">
                     <td>£{budget.staff}</td>
-                    <td><GrUserWorker className="icon"/>Staff</td>
+                    <td className="text-start"><GrUserWorker className="icon"/>Staff</td>
                     <td>£{expenses.staff}</td>
                   </tr>
                   <tr className="managerial-row">
                     <td>£{budget.managerial}</td>
-                    <td><GrUserManager className="icon"/> Managerial</td>
+                    <td className="text-start"><GrUserManager className="icon"/> Managerial</td>
                     <td>£{expenses.managerial}</td>
                   </tr>
                   <tr className="marketing-row">
                     <td>£{budget.marketing}</td>
-                    <td><RiAdvertisementFill className="icon"/>Marketing</td>
+                    <td className="text-start"><RiAdvertisementFill className="icon"/>Marketing</td>
                     <td>£{expenses.marketing}</td>
                   </tr>
                   <tr className="utility-row">  
                     <td>£{budget.utility}</td>
-                    <td><MdHandyman className="icon"/>Utility</td>
+                    <td className="text-start"><MdHandyman className="icon"/>Utility</td>
                     <td>£{expenses.utility}</td>
                   </tr>
                   <tr className="total-row">
                     <td>£{totalBudget}</td>  
-                    <td><RiMoneyPoundCircleLine className="icon"/> Total</td>
+                    <td className="text-start"><RiMoneyPoundCircleLine className="icon"/> Total</td>
                     <td>£{totalExpenses}</td>
                   </tr>
                     
@@ -190,6 +199,7 @@ const Home = () => {
                 <Form.Group  className="mt-2 form-group form-group-venue"as={Row}>
                     <Form.Label column sm="1">
                       <MdStadium className="icon"/>
+                      <SiTicktick id="venue-tick" className="tick-icon"/>
                     </Form.Label>
                     <Col >
                     <Form.Control name="venue" type="number" placeholder="Venue" onChange={handleChange} required/>

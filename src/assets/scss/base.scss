@@ -15,11 +15,15 @@ body{
 }
 .home-navbar{
     background-color: rgb(112, 112, 183);
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     a{
         text-decoration: none;
         color: white;
+    }
+    a:hover, a:focus{
+        border: none;
+        outline: none;
     }
     .nav-item:hover{
         background-color:rgba(35, 35, 55, 0.7);
@@ -48,6 +52,7 @@ body{
         padding: 7px;
         margin: 5px;
     }
+    //Table//
     .budget-column{
         width: 30%;
     }
@@ -93,6 +98,11 @@ body{
         font-weight: 600;
        } 
     }
+    td .icon{
+        margin-left:30%;
+    }
+    
+}
     .form-group{
         border: 2px solid gray;
         border-radius: 10px;
@@ -102,17 +112,19 @@ body{
             border-right: 2px solid;
         }
         input{
-            width: 100%;
             padding: .5em;
             border: none;
             outline: none;
+            border-radius: 0;
+        }
+        .col{
+            padding: 0;
         }
         input:focus{
-            border-left: 2px solid gray;
+            border-bottom: 2px solid white;
             -webkit-box-shadow: none;
             box-shadow: none;
             outline: none;
-            border: none;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -120,7 +132,7 @@ body{
         margin: 0;
         }
     }
-    
+
     .form-group:hover, .form-group:hover input{
         background-color: white;
     }
@@ -146,11 +158,14 @@ body{
     .form-group-utility,.form-group-utility input{
         background-color: $utility-color;
     }
-}
 
 
 
 .icon{
     font-size: 26px;
+}
+.tick-icon{
+    font-size: 26px;
+    display: none;
 }
 

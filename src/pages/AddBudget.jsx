@@ -2,6 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+//Icons //
+import { MdStadium, MdHandyman } from "react-icons/md"
+import { FaTools } from "react-icons/fa"
+import { TfiMicrophoneAlt } from "react-icons/tfi"
+import { GrUserWorker, GrUserManager } from "react-icons/gr"
+import { RiAdvertisementFill, RiMoneyPoundCircleLine } from "react-icons/ri"
 
 const AddBudget = () => {
 
@@ -57,74 +63,76 @@ const AddBudget = () => {
 
   return (
     
-    <Container className="budget" >
-        <Row className="">
+    <Container className="budget justify-content-center" >
+        <Row className="justify-content-center text-center mt-4">
             <h1>Forcaseted Budget</h1>
             <h3>Please Fill in all expected expenses for the Project</h3>
-            <Form onSubmit={submit}>
-                <Form.Group  className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Venue (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="venue" type="number" onChange={handleChange} required/>
+            <Col className="update-expenses text-center  p-4"  xs={12} lg={8}>
+                <Form onSubmit={submit}>
+                    <Form.Group  className="mt-2 form-group form-group-venue"as={Row}>
+                        <Form.Label column sm="1">
+                            <MdStadium className="icon"/>
+                        </Form.Label>
+                        <Col >
+                        <Form.Control name="venue" type="number" placeholder="Venue" onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-equipment"as={Row}>
+                        <Form.Label column sm="1">
+                            <FaTools className="icon"/>
+                        </Form.Label>
+                        <Col>
+                        <Form.Control name="equipment" type="number" placeholder="Equipment"onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-performers"as={Row}>
+                        <Form.Label column sm="1">
+                            <TfiMicrophoneAlt className="icon"/>
+                        </Form.Label>
+                        <Col>
+                        <Form.Control name="performers" type="number" placeholder="Performers"onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-staff"as={Row}>
+                        <Form.Label column sm="1">
+                            <GrUserWorker className="icon"/>
+                        </Form.Label>
+                        <Col >
+                        <Form.Control name="staff" type="number" placeholder="Staff" onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-managerial"as={Row}>
+                        <Form.Label column sm="1">
+                            <GrUserManager className="icon"/>
+                        </Form.Label>
+                        <Col>
+                        <Form.Control name="managerial" type="number" placeholder="Managerial" onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-marketing"as={Row}>
+                        <Form.Label column sm="1">
+                        <RiAdvertisementFill className="icon"/>
+                        </Form.Label>
+                        <Col >
+                        <Form.Control name="marketing" type="number" placeholder="Marketing" onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group className="mt-2 form-group form-group-utility"as={Row}>
+                        <Form.Label column sm="1">
+                            <MdHandyman className="icon"/>
+                        </Form.Label>
+                        <Col >
+                        <Form.Control name="utility" type="number" placeholder="Utility" onChange={handleChange} required/>
+                        </Col>
+                    </Form.Group>
+                    <Col className="justify-content-center">
+                        <Button variant="secondary" className="mt-2" type="submit">
+                        Submit 
+                        </Button>   
                     </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Equipment (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="equipment" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Performers (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="performers" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Staff (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="staff" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Managerial (£)
-                    </Form.Label>
-                    <Col sm="5"><span></span>
-                    <Form.Control name="managerial" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Marketing (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="marketing" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Form.Group className="mt-2 justify-content-center"as={Row}>
-                    <Form.Label column sm="1">
-                        Utility (£)
-                    </Form.Label>
-                    <Col sm="5">
-                    <Form.Control name="utility" type="number" onChange={handleChange} required/>
-                    </Col>
-                </Form.Group>
-                <Col className="justify-content-center">
-                    <Button variant="secondary" className="mt-2" type="submit">
-                    Submit 
-                    </Button>   
-                </Col>
-                
-            </Form>
+                    
+                </Form>
+            </Col>
         </Row>
         {/* Total Budget */}
         <Row className="intro justify-content-center text-center m-4" >
