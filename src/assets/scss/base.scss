@@ -51,7 +51,18 @@ body{
         text-align: center;
         padding: 7px;
         margin: 5px;
+        width: 40vw;
     }
+    .login-row{
+        .col-md-3{
+           border: 2px solid gray;
+           border-radius: 10px;
+           margin: 5px;  
+        }
+       
+    }
+}
+
     //Table//
     .budget-column{
         width: 30%;
@@ -102,7 +113,6 @@ body{
         margin-left:30%;
     }
     
-}
     .form-group{
         border: 2px solid gray;
         border-radius: 10px;

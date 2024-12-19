@@ -4,6 +4,7 @@ import './assets/scss/base.scss'
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AddBudget from './pages/AddBudget';
+import Expenses from './pages/Expenses';
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
       {
         path: "/add-budget",
         element: <AddBudget />
+      },
+      {
+        path: "/expenses",
+        element: <Expenses />
       },
     ]
     }
