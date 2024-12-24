@@ -20,6 +20,23 @@ const mdb = mysql.createConnection({
     database: process.env.MYSQL_DATABASE, 
 })
 
+// Login //
+
+app.post("/login",(req,res)=>{
+const q = "SELECT * FROM users WHERE `username` = ? AND `password` = ? "
+const val = [
+    req.body.username,
+    req.body.password
+]
+mdb.query(q, [...val], (err, data)=> {
+    if (err) return res.json(err + "Login Unsuccessfull");
+    if (data.length > 0) {
+        return res.json(data)
+    } else {
+        return res.json("no record")}
+})
+})
+
 // Get Budget //
 
 app.get("/get-budget", (req,res) => {

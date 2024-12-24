@@ -1,101 +1,27 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form, Button, Table, Nav } from 'react-bootstrap'
-import { ColorRing } from 'react-loader-spinner'
-import { useNavigate } from 'react-router'
 //Icons //
-import { MdStadium, MdHandyman } from "react-icons/md"
-import { FaTools } from "react-icons/fa"
-import { TfiMicrophoneAlt } from "react-icons/tfi"
-import { GrUserWorker, GrUserManager } from "react-icons/gr"
-import { RiAdvertisementFill, RiMoneyPoundCircleLine } from "react-icons/ri"
-import { SiTicktick } from "react-icons/si";
 
 
 
 const Home = () => {
+// Login States //
+const [username, setUsername ] = useState('')
+const [password,setPassword] = useState('')
 
-  const [budget, setBudget] = useState()
-  const [expenses, setExpenses] = useState()
-  const [totalBudget, setTotalBudget] = useState(0)
-  const [totalExpenses, setTotalExpenses] = useState(0)
+useEffect(()=> {
 
-  const [newExpenses, setNewExpenses ] = useState({
-    venue:0,
-    equipment: 0,
-    performers: 0,
-    staff: 0,
-    managerial: 0,
-    marketing: 0,
-    utility: 0,
-  })
+},[])
 
-
-  const navigate = useNavigate()
-
-  //Get Budget //
-  const getBudget = async () => {
-    try{
-      const res = await axios.get("https://project-expenses-app.onrender.com/get-budget")
-      const data = res.data[0]
-      setBudget(data)
-      delete data.id
-      const values = Object.values(data)
-      let newTotal = 0
-      values.forEach((n)=> {
-          newTotal += Number(n)
-      })
-      setTotalBudget(newTotal)
-    } catch(err){
-      console.log(err)
-    }
-  } 
-  useEffect(()=>{
-    getBudget()
-  }, [])
-  // Get Expenses //
-  const getExpenses = async () => {
-    try{
-      const res = await axios.get("https://project-expenses-app.onrender.com/get-expenses")
-      const data = res.data[0]
-      setExpenses(data)
-      delete data.id
-      const values = Object.values(data)
-      let newTotal = 0
-      values.forEach((n)=> {
-        newTotal += Number(n)
-      })
-      setTotalExpenses(newTotal)
-    } catch(err){
-      console.log(err)
-    }
-  } 
-  useEffect(()=>{
-    getExpenses()
-  }, [])
-
-  //Update Expenses //
-
-
-  const handleChange = (e) => {
-    setNewExpenses(prev=>({...prev, [e.target.name]:Number(e.target.value) }))
-    const catId = document.getElementById( e.target.name + '-tick')
-    console.log(catId)
-    catId.style.display = "block"
-  }
-  const submit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
     try{
-        await axios.put("https://project-expenses-app.onrender.com/new-expenses", newExpenses)
-        console.log("sent successfully")
-        navigate(0)
-    } catch(err) {
-        console.log(err)
+      const res = await axios.post("http://localhost:8000/login", {username, password})
+      return console.log(res.data)
+    } catch (err) {
+      console.log(err)
     }
-  }
-
-  const inputTicked = () => {
-    return <SiTicktick className="tick-icon"/>
   }
 
   return (
@@ -127,46 +53,51 @@ const Home = () => {
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="login" sm={12} md={3}>
           <h2>Login</h2>
-          <Form.Group>
+          <Form onSubmit={handleLogin}>
+            <Form.Group>
             <Form.Label>
               Username
             </Form.Label>
-            <Form.Control name="username" type="text"/>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>
-              Password
-            </Form.Label>
-            <Form.Control name="password" type="password"/>
-          </Form.Group>
-          <Button className="secondary"type="submit">Login</Button>
+            <Form.Control name="username" type="text" onChange={(e)=> setUsername(e.target.value)}/>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Password
+              </Form.Label>
+              <Form.Control name="password" type="password" onChange={(e)=> setPassword(e.target.value)}/>
+            </Form.Group>
+            <Button className="secondary" type="submit">Login</Button>
+          </Form>
+          
         </Col>
         <Col className="register" sm={12} md={3}>
           <h2>Register</h2>
-          <Form.Group>
-            <Form.Label>
-              Username
-            </Form.Label>
-            <Form.Control name="username" type="text"/>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>
-              Email
-            </Form.Label>
-            <Form.Control name="email" type="text"/>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>
-              Password
-            </Form.Label>
-            <Form.Control name="password" type="password"/>
-          </Form.Group>
-          <Button className="secondary"type="submit">Register</Button>
+          <Form>
+            <Form.Group>
+              <Form.Label>
+                Username
+              </Form.Label>
+              <Form.Control name="username" type="text"/>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Email
+              </Form.Label>
+              <Form.Control name="email" type="text"/>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Password
+              </Form.Label>
+              <Form.Control name="password" type="password"/>
+            </Form.Group>
+            <Button className="secondary"type="submit">Register</Button>
+          </Form>
         </Col>
         <Col className="guest" sm={12} md={3}>
           <h2>Guest</h2>
           <p>
-            Guest Allows you to use most features, but disable others such as metrics.
+            Guest Allows you to use most features, but disables others such as metrics.
           </p>
           <Button>Guest Login</Button>
         </Col>
