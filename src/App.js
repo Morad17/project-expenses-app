@@ -7,17 +7,21 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AddBudget from './pages/AddBudget';
 import Expenses from './pages/Expenses';
+import PrivateRoute from './components/PrivateRoute';
+import Metrics from "./pages/Metrics";
 
 function App() {
 
   const Layout = () => {
     return(
      <div className="main-layout">
-      <Navbar />
-      <Outlet />
+      <AuthProvider>
+        <Navbar />
+        <Outlet />
+      </AuthProvider>
+      
     </div> 
     )
-    
   }
 
   const router = createBrowserRouter([
@@ -37,15 +41,19 @@ function App() {
         path: "/expenses",
         element: <Expenses />
       },
-    ]
+      {
+        path: "/metrics",
+        element: <PrivateRoute>
+                  <Metrics />
+                  </PrivateRoute>
+      }
+      ]
     }
   ])
 
   return (
     <div className="App">
-      <AuthProvider>
         <RouterProvider router={router}/>
-      </AuthProvider>
     </div>
   );
 }
