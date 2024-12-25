@@ -17,7 +17,7 @@ useEffect(()=> {
   const handleLogin = async (e) => {
     e.preventDefault()
     try{
-      const res = await axios.post("http://localhost:8000/login", {username, password})
+      const res = await axios.post("https://project-expenses-app.onrender.com/login", {username, password})
       return console.log(res.data)
     } catch (err) {
       console.log(err)
