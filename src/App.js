@@ -43,9 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthProvider>
         <RouterProvider router={router}/>
-      </AuthProvider>
     </div>
   );
 }
