@@ -1,4 +1,6 @@
 import {Outlet, createBrowserRouter, RouterProvider} from 'react-router-dom'
+import AuthProvider from './hooks/Authprovider';
+
 import './assets/scss/base.scss'
 
 import Navbar from './components/Navbar';
@@ -41,7 +43,9 @@ function App() {
 
   return (
     <div className="App">
-      <RouterProvider router={router}/>
+      <AuthProvider>
+        <RouterProvider router={router}/>
+      </AuthProvider>
     </div>
   );
 }
