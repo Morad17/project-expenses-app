@@ -52,10 +52,10 @@ const Home = () => {
        
       </Row>
       {
-        user ? 
-        <Row>
-          
-        </Row>
+        // user ? 
+        // <Row>
+
+        // </Row>
       }
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="intro-paragraph" xs={12} md={5}>
