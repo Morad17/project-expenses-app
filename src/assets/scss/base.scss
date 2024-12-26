@@ -13,6 +13,7 @@ body{
     margin: 0;
     padding: 0;
 }
+//Navbar//
 .home-navbar{
     background-color: rgb(112, 112, 183);
     font-size: 20px;
@@ -24,6 +25,9 @@ body{
     a:hover, a:focus{
         border: none;
         outline: none;
+    }
+    p{
+        margin: 0;
     }
     .nav-item:hover{
         background-color:rgba(35, 35, 55, 0.7);
@@ -62,6 +66,8 @@ body{
        
     }
 }
+
+
 
     //Table//
     .budget-column{

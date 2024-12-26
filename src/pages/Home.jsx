@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form, Button} from 'react-bootstrap'
 import {useAuth} from "../hooks/Authprovider"
@@ -33,13 +32,13 @@ const Home = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     auth.loginAction(credentials)
-    
+
   }
 
   return (
     <Container className="home justify-content-center text-center" fluid>
       <Row >
-        <h1 className="home-title mt-4 mb-4">Expense Tracker {}</h1>
+        <h1 className="home-title mt-4 mb-4">Expense Tracker {user}</h1>
       </Row>
       <Row className="flex-column align-content-center">
         <Col className="intro-paragraph justify-content-center" xs={12} md={5}>
@@ -52,6 +51,12 @@ const Home = () => {
         </Col>
        
       </Row>
+      {
+        user ? 
+        <Row>
+          
+        </Row>
+      }
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="intro-paragraph" xs={12} md={5}>
             <p>

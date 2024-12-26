@@ -8,18 +8,18 @@ const AuthContext = createContext()
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
-    const [token, setToken ] = useState(localStorage.getItem("username") || "")
+    const [token, setToken ] = useState("")
     const navigate = useNavigate()
     const loginAction = async ({username, password}) => {
       try{        
         const res = await axios.post("https://project-expenses-app.onrender.com/login", {"username":username, "password": password})
-        console.log(res)
+        console.log("lk")
         if (res.data.length > 0) {
             console.log(res.data)
             setUser(res.data.username)
-            setToken(res.token)
-            localStorage.setItem("username", res.token)
-            navigate("/")
+            setToken(username)
+            localStorage.setItem("username", username)
+            navigate(0)
             return
           }
         else throw new Error(res.message)
