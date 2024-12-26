@@ -33,7 +33,7 @@ mdb.query(q, [...val], (err, data)=> {
     if (data.length > 0) {
         return res.json(data)
     } else {
-        return res.json("no record")}
+        return ""}
 })
 })
 
