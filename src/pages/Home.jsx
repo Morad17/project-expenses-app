@@ -1,22 +1,38 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form, Button, Table, Nav } from 'react-bootstrap'
+import {useAuth} from "../hooks/Authprovider"
 //Icons //
 
 
 
 const Home = () => {
-// Login States //
-const [username, setUsername ] = useState('')
-const [password,setPassword] = useState('')
+  // Login States //
+  const [user, setUser] = useState(null)
+  const [credentials, setCredeuntials] = useState({
+    username: "",
+    password: ""
+  })
 
-useEffect(()=> {
+  const auth = useAuth()
 
-},[])
+  const checkUser = () => {
+    setUser(localStorage.getItem("username"))
+    console.log(user)
+  }
+
+  useEffect(()=> {
+    checkUser()
+  },[])
+
+  const setDetails = (e) => {
+    setCredeuntials(prev => ({...prev, [e.target.name]: e.target.value}))
+    console.log(credentials)
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    
+    auth.loginAction(credentials)
   }
 
   return (
@@ -53,13 +69,13 @@ useEffect(()=> {
             <Form.Label>
               Username
             </Form.Label>
-            <Form.Control name="username" type="text" onChange={(e)=> setUsername(e.target.value)}/>
+            <Form.Control required name="username" type="text" onChange={setDetails}/>
             </Form.Group>
             <Form.Group>
               <Form.Label>
                 Password
               </Form.Label>
-              <Form.Control name="password" type="password" onChange={(e)=> setPassword(e.target.value)}/>
+              <Form.Control required name="password" type="password" onChange={setDetails}/>
             </Form.Group>
             <Button className="secondary" type="submit">Login</Button>
           </Form>
@@ -72,19 +88,19 @@ useEffect(()=> {
               <Form.Label>
                 Username
               </Form.Label>
-              <Form.Control name="username" type="text"/>
+              <Form.Control required name="username" type="text"/>
             </Form.Group>
             <Form.Group>
               <Form.Label>
                 Email
               </Form.Label>
-              <Form.Control name="email" type="text"/>
+              <Form.Control required name="email" type="text"/>
             </Form.Group>
             <Form.Group>
               <Form.Label>
                 Password
               </Form.Label>
-              <Form.Control name="password" type="password"/>
+              <Form.Control required name="password" type="password"/>
             </Form.Group>
             <Button className="secondary"type="submit">Register</Button>
           </Form>
