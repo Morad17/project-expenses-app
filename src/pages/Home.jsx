@@ -60,17 +60,14 @@ const Home = () => {
         </Col>
        
       </Row>
-      { user ?
+      {/* { user ? */}
         <Row>
-          {
-
-          }
           <h2>Welcome {user}. To get started set up your total Project Budget here:</h2>
           <Button className="secondary">
             <Link to="/add-budget">Set Budget</Link>
           </Button>
         </Row>
-      }
+      
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="intro-paragraph" xs={12} md={5}>
             <p>
