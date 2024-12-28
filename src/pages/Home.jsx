@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form, Button} from 'react-bootstrap'
 import {useAuth} from "../hooks/Authprovider"
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import axios from 'axios'
 //Icons //
 
 
 
 const Home = () => {
+  const navigate = useNavigate()
   // Login States //
   const [user, setUser] = useState(null)
   const [loadForm, setLoadform] = useState('')
@@ -38,8 +39,13 @@ const Home = () => {
     if (loggedUser) {
       try{
         const res = await axios.get("https://project-expenses-app.onrender.com/get-expenses", loggedUser)
-      } catch {
-
+        if (res.data.length > 0) {
+          navigate("/expenses")
+        } else {
+          navigate("/add-budget")
+        }
+      } catch (err){
+        console.log(err)
       }
     }
   }
@@ -60,13 +66,6 @@ const Home = () => {
         </Col>
        
       </Row>
-      {/* { user ? */}
-        <Row>
-          <h2>Welcome {user}. To get started set up your total Project Budget here:</h2>
-          <Button className="secondary">
-            <Link to="/add-budget">Set Budget</Link>
-          </Button>
-        </Row>
       
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="intro-paragraph" xs={12} md={5}>

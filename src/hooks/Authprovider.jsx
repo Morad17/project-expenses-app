@@ -13,13 +13,11 @@ const AuthProvider = ({children}) => {
     const loginAction = async ({username, password}) => {
       try{        
         const res = await axios.post("https://project-expenses-app.onrender.com/login", {"username":username, "password": password})
-        console.log("lk")
         if (res.data.length > 0) {
             console.log(res.data)
             setUser(res.data.username)
             setToken(username)
             localStorage.setItem("username", username)
-            navigate(0)
             return
           }
         else throw new Error(res.message)
