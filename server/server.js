@@ -40,8 +40,9 @@ mdb.query(q, [...val], (err, data)=> {
 // Get Budget //
 
 app.get("/get-budget", (req,res) => {
-    const q = "SELECT * FROM budget WHERE id = 1"
-    mdb.query(q, (err,data) => {
+    const q = "SELECT * FROM budget WHERE username = ?"
+    const val = req.body.userame
+    mdb.query(q, val, (err,data) => {
         if (err) return res.json(err)
         else {
             return res.json(data)
