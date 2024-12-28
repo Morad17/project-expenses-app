@@ -21,7 +21,6 @@ const Home = () => {
 
   const checkUser = () => {
     setUser(localStorage.getItem("username"))
-    console.log(user)
   }
 
   useEffect(()=> {
@@ -39,8 +38,9 @@ const Home = () => {
     if (loggedUser) {
       try{
         const res = await axios.get("https://project-expenses-app.onrender.com/get-expenses", loggedUser)
+        navigate("/expenses")
         if (res.data.length > 0) {
-          navigate("/expenses")
+          
         } else {
           navigate("/add-budget")
         }

@@ -29,7 +29,7 @@ const val = [
     req.body.password
 ]
 mdb.query(q, [...val], (err, data)=> {
-    if (err) return res.json(err + "Login Unsuccessfull");
+    if (err) return console.log("login unsuccessfull");
     if (data.length > 0) {
         return res.json(data)
     } else {
