@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Col } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import { useAuth } from '../hooks/Authprovider'
 
 const Navbar = () => {
   const [user, setUser ] = useState('')
@@ -11,6 +12,10 @@ const Navbar = () => {
   useEffect(()=> {
     checkUser()
   },[])
+  const auth = useAuth()
+  const logout = () => {
+    auth.logout()
+  }
 
   return (
     <Nav className="home-navbar justify-content-between align-items-center" variant="tabs" defaultActiveKey="/home">  
@@ -29,6 +34,9 @@ const Navbar = () => {
           <Nav.Item>
               <Nav.Link >Metrics</Nav.Link>
           </Nav.Item>
+          {user && <Nav.Item>
+              <Nav.Link onClick={logout}>Logout</Nav.Link>
+          </Nav.Item>}
         </Col>
         
     </Nav>

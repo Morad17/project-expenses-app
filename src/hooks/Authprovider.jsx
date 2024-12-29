@@ -33,7 +33,7 @@ const AuthProvider = ({children}) => {
         setToken("")
         localStorage.removeItem("username")
         console.log("successfully logged out")
-        navigate("/")
+        navigate(0)
     }
 
     return <AuthContext.Provider value={{ token, user, loginAction, logout}}>
