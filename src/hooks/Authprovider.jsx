@@ -15,6 +15,7 @@ const AuthProvider = ({children}) => {
         const res = await axios.post("https://project-expenses-app.onrender.com/login", 
         {"username":username, "password": password})
         console.log("test")   
+        
         if (res.data.length > 0) {
             console.log(res.data)
             setUser(res.data.username)
