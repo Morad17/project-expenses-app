@@ -19,6 +19,24 @@ const mdb = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE, 
 })
+// Register //
+
+app.post("/register", (req,res) => {
+    const q = "INSERT INTO users VALUES `username`= ?, `email`= ?, `password` = ?" 
+    const val = [
+        req.body.username,
+        req.body.email,
+        req.body.password
+    ]
+    const userQ = "SELECT * FROM users WHERE `username` = ?"
+    mdb.query(userQ,req.body.username, (err, data) => {
+        if (err) return console.log(err)
+        if (data.length > 0 ) {
+            return console.log("existing user found")
+        }
+    })
+})
+
 
 // Login //
 

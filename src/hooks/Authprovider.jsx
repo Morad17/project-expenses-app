@@ -16,16 +16,16 @@ const AuthProvider = ({children}) => {
         {"username":username, "password": password})
         console.log("test")   
         
-        if (res.data.length > 0) {
+        if (res.data > 0 ) {
             console.log(res.data)
             setUser(res.data.username)
             setToken(username)
             localStorage.setItem("username", username)
             return
           }
-        else console.log("wrong info")
+        throw new Error(res.message);
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     }
     const logout = () => {

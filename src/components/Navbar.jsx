@@ -11,10 +11,11 @@ const Navbar = () => {
 
   useEffect(()=> {
     checkUser()
-  },[])
+  },[user])
   const auth = useAuth()
   const logout = () => {
     auth.logout()
+    setUser('')
   }
 
   return (

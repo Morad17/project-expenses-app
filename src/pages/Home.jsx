@@ -16,17 +16,24 @@ const Home = () => {
     username: "",
     password: ""
   })
+  const [register, setRegister] = useState({
+    username:"",
+    email:"",
+    password: "",
+  })
 
   const auth = useAuth()
 
   const checkUser = () => {
     setUser(localStorage.getItem("username"))
+
   }
 
   useEffect(()=> {
     checkUser()
   },[user])
 
+//Login //
   const setDetails = (e) => {
     setCredeuntials(prev => ({...prev, [e.target.name]: e.target.value}))
   }
@@ -47,6 +54,22 @@ const Home = () => {
       } catch (err){
         console.log(err)
       }
+    } else {
+      console.log("try again")
+    }
+  }
+// Register //
+  const setRegistration = (e) => {
+    setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.post('http://localhost:8000/register', {"username": register.username})
+      
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -101,24 +124,24 @@ const Home = () => {
           : loadForm === "register"? 
               <Col className="register" sm={12} md={5}>
               <h2>Register</h2>
-              <Form>
+              <Form onSubmit={handleRegister}>
                 <Form.Group>
                   <Form.Label>
                     Username
                   </Form.Label>
-                  <Form.Control required name="username" type="text"/>
+                  <Form.Control required name="username" type="text" onChange={setRegistration}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
                     Email
                   </Form.Label>
-                  <Form.Control required name="email" type="text"/>
+                  <Form.Control required name="email" type="text" onChange={setRegistration}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
                     Password
                   </Form.Label>
-                  <Form.Control required name="password" type="password"/>
+                  <Form.Control required name="password" type="password" onChange={setRegistration}/>
                 </Form.Group>
                     <Button className="secondary"type="submit">Register</Button>
               </Form>
