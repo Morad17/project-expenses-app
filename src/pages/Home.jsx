@@ -66,8 +66,8 @@ const Home = () => {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:8000/register', {"username": register.username})
-      
+      const res = await axios.post('https://project-expenses-app.onrender.com/register', {"username": register.username})
+      console.log(res.data)
     } catch (err) {
       console.log(err)
     }

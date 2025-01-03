@@ -33,7 +33,7 @@ app.post("/register", (req,res) => {
         if (err) return console.log(err)
         if (data.length > 0 ) {
             return console.log("existing user found")
-        }
+        } else return console.log("success")
     })
 })
 
