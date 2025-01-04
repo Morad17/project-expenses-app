@@ -11,19 +11,18 @@ const AuthProvider = ({children}) => {
     const [token, setToken ] = useState("")
     const navigate = useNavigate()
     const loginAction = async ({username, password}) => {
-      try{     
-        const res = await axios.post("https://project-expenses-app.onrender.com/login", 
-        {"username":username, "password": password})
-        console.log("test")   
-        
-        if (res.data > 0 ) {
+      try{
+        const res = await axios.post("https://project-expenses-app.onrender.com/login", {"username":username, "password": password})      
+        if (res.data.length > 0 ) {
             console.log(res.data)
             setUser(res.data.username)
             setToken(username)
             localStorage.setItem("username", username)
             return
           }
-        throw new Error(res.message);
+        else {
+          console.log("try again")
+        }
       } catch (err) {
         console.error(err)
       }
