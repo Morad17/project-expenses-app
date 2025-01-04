@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Form, Button} from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Modal} from 'react-bootstrap'
 import {useAuth} from "../hooks/Authprovider"
 import { Link, useNavigate } from 'react-router'
 import axios from 'axios'
@@ -21,6 +21,7 @@ const Home = () => {
     email:"",
     password: "",
   })
+  const [error, setError] = useState()
 
   const auth = useAuth()
 
@@ -63,12 +64,27 @@ const Home = () => {
     setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
+  const errorHandler = (error) => {
+    console.log("error handler")
+    switch (error) {
+      case 500:
+        setError("Username Already In Use!")
+        setTimeout(()=> {
+          setError(null)
+        }, 5000)
+        break;
+    
+      default:
+        break;
+    }
+  }
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
       const res = await axios.post('http://localhost:8000/register', 
       {"username": register.username})
       console.log(res.data)
+        if (typeof res.data === 'number') errorHandler(res.data)
     } catch (err) {
       console.log(err)
     }
@@ -90,7 +106,12 @@ const Home = () => {
         </Col>
        
       </Row>
-      
+      {
+        error && 
+        <Modal.Dialog>
+          <Modal.Title>{error}</Modal.Title>
+        </Modal.Dialog>
+      }
       <Row className="login-row justify-content-center mt-3 ">
         <Col className="intro-paragraph" xs={12} md={5}>
             <p>

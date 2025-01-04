@@ -32,7 +32,7 @@ app.post("/register", (req,res) => {
     mdb.query(userQ,req.body.username, (err, data) => {
         if (err) return console.log(err)
         if (data.length > 0 ) {
-            return console.log("existing user found")
+            return res.json(500)
         } else return console.log("success")
     })
 })
