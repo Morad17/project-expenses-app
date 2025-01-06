@@ -21,7 +21,7 @@ const Home = () => {
     email:"",
     password: "",
   })
-  const [error, setError] = useState()
+  const [statusCode, setStatusCode] = useState()
 
   const auth = useAuth()
 
@@ -64,14 +64,33 @@ const Home = () => {
     setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
-  const errorHandler = (error) => {
-    console.log("error handler")
-    switch (error) {
+  const statusCodeHandler = (statusCode) => {
+    switch (statusCode) {
       case 500:
-        setError("Username Already In Use!")
+        setStatusCode("Username Already Exists")
         setTimeout(()=> {
-          setError(null)
+          setStatusCode(null)
         }, 5000)
+        break
+      case 401:
+        setStatusCode("Username must be between 6 and 15 characters long")
+        setTimeout(()=> {
+          setStatusCode(null)
+        }, 5000)
+        break
+      case 402:
+        setStatusCode("Password must contain at least 8 characters")
+        setTimeout(()=> {
+          setStatusCode(null)
+        }, 5000)
+      
+        break;
+      case 201:
+        setStatusCode("You have successfully registered!")
+        setTimeout(()=> {
+          setStatusCode(null)
+        }, 5000)
+      
         break;
     
       default:
@@ -80,11 +99,17 @@ const Home = () => {
   }
   const handleRegister = async (e) => {
     e.preventDefault()
+    // Check username & 
+    if (register.username.length < 6 || register.username.length > 15 ) {
+      return statusCodeHandler(401)
+    } else if (register.password.length < 8){
+      return statusCodeHandler(402)
+    }
     try {
       const res = await axios.post('http://localhost:8000/register', 
-      {"username": register.username})
+      register)
       console.log(res.data)
-        if (typeof res.data === 'number') errorHandler(res.data)
+      if (typeof res.data === 'number') statusCodeHandler(res.data)
     } catch (err) {
       console.log(err)
     }
@@ -107,9 +132,9 @@ const Home = () => {
        
       </Row>
       {
-        error && 
+        statusCode && 
         <Modal.Dialog>
-          <Modal.Title>{error}</Modal.Title>
+          <Modal.Title>{statusCode}</Modal.Title>
         </Modal.Dialog>
       }
       <Row className="login-row justify-content-center mt-3 ">
@@ -157,7 +182,7 @@ const Home = () => {
                   <Form.Label>
                     Email
                   </Form.Label>
-                  <Form.Control required name="email" type="text" onChange={setRegistration}/>
+                  <Form.Control required name="email" type="email" onChange={setRegistration}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>

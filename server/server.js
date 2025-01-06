@@ -22,19 +22,33 @@ const mdb = mysql.createConnection({
 // Register //
 
 app.post("/register", (req,res) => {
-    const q = "INSERT INTO users VALUES `username`= ?, `email`= ?, `password` = ?" 
+    const q = "INSERT INTO users (`username`, `email`, `password`) VALUES (?)" 
     const val = [
         req.body.username,
         req.body.email,
         req.body.password
     ]
     const userQ = "SELECT * FROM users WHERE `username` = ?"
+    const emailQ = "SELECT * FROM users WHERE `email` = ?"
     mdb.query(userQ,req.body.username, (err, data) => {
         if (err) return console.log(err)
         if (data.length > 0 ) {
-            return res.json(500)
-        } else return console.log("success")
+            return res.json(501)
+        }
     })
+    mdb.query(emailQ,req.body.email, (err, data) => {
+        if (err) return console.log(err)
+        if (data.length > 0 ) {
+            return res.json(502)
+        }
+    })
+    mdb.query(q,[val], (err, data) => {
+        if (err) return res.json(err)
+        else {
+            return res.json("success")
+        }
+    })
+
 })
 
 
