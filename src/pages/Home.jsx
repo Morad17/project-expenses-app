@@ -11,6 +11,9 @@ const Home = () => {
   const navigate = useNavigate()
   // Login States //
   const [user, setUser] = useState(null)
+  const [existingUsers, setExistingUsers] = useState({
+    usernames: [], emails: []
+  })
   const [loadForm, setLoadform] = useState('')
   const [credentials, setCredeuntials] = useState({
     username: "",
@@ -27,12 +30,36 @@ const Home = () => {
 
   const checkUser = () => {
     setUser(localStorage.getItem("username"))
-
   }
 
   useEffect(()=> {
     checkUser()
   },[user])
+
+  const getExistingUsers = async () => {
+    setExistingUsers({
+      usernames: [], emails: []
+    })
+    try {
+      const res = await axios.get("http://localhost:8000/get-existing-users")
+      const data = res.data
+      for (let i in data){
+        existingUsers.usernames.push(data[i].username)
+      }
+      for (let i in data){
+        existingUsers.emails.push(data[i].email)
+      }
+      console.log(existingUsers)
+    } catch (err) {
+      console.log(err)
+    }
+    
+
+  }
+
+  useEffect(()=> {
+    getExistingUsers()
+  },[])
 
 //Login //
   const setDetails = (e) => {
@@ -66,8 +93,14 @@ const Home = () => {
 
   const statusCodeHandler = (statusCode) => {
     switch (statusCode) {
-      case 500:
+      case 501:
         setStatusCode("Username Already Exists")
+        setTimeout(()=> {
+          setStatusCode(null)
+        }, 5000)
+        break
+      case 502:
+        setStatusCode("Email is Alreading in use")
         setTimeout(()=> {
           setStatusCode(null)
         }, 5000)
@@ -89,6 +122,7 @@ const Home = () => {
         setStatusCode("You have successfully registered!")
         setTimeout(()=> {
           setStatusCode(null)
+          navigate(0)
         }, 5000)
       
         break;
@@ -99,17 +133,21 @@ const Home = () => {
   }
   const handleRegister = async (e) => {
     e.preventDefault()
-    // Check username & 
+    // Checks for Existing users error and length error //
     if (register.username.length < 6 || register.username.length > 15 ) {
       return statusCodeHandler(401)
     } else if (register.password.length < 8){
       return statusCodeHandler(402)
+    } else if (existingUsers.usernames.includes(register.username) ){
+      return statusCodeHandler(501)
+    } else if (existingUsers.emails.includes(register.email) ){
+      return statusCodeHandler(502)
     }
     try {
-      const res = await axios.post('http://localhost:8000/register', 
+      await axios.post('http://localhost:8000/register', 
       register)
-      console.log(res.data)
-      if (typeof res.data === 'number') statusCodeHandler(res.data)
+      statusCodeHandler(201)
+      auth.loginAction(register)
     } catch (err) {
       console.log(err)
     }

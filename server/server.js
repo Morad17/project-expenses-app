@@ -19,6 +19,16 @@ const mdb = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE, 
 })
+// Get Usernames and Emails //
+
+app.get("/get-existing-users", (req, res) => {
+    const q = "SELECT * FROM users"
+    mdb.query(q, (err, data) => {
+        if (err) return res.json(err)
+        else return res.json(data)
+    })
+})
+
 // Register //
 
 app.post("/register", (req,res) => {
@@ -28,20 +38,6 @@ app.post("/register", (req,res) => {
         req.body.email,
         req.body.password
     ]
-    const userQ = "SELECT * FROM users WHERE `username` = ?"
-    const emailQ = "SELECT * FROM users WHERE `email` = ?"
-    mdb.query(userQ,req.body.username, (err, data) => {
-        if (err) return console.log(err)
-        if (data.length > 0 ) {
-            return res.json(501)
-        }
-    })
-    mdb.query(emailQ,req.body.email, (err, data) => {
-        if (err) return console.log(err)
-        if (data.length > 0 ) {
-            return res.json(502)
-        }
-    })
     mdb.query(q,[val], (err, data) => {
         if (err) return res.json(err)
         else {
