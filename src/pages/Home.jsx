@@ -49,7 +49,6 @@ const Home = () => {
       for (let i in data){
         existingUsers.emails.push(data[i].email)
       }
-      console.log(existingUsers)
     } catch (err) {
       console.log(err)
     }
