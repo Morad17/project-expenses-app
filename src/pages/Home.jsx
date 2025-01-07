@@ -41,7 +41,7 @@ const Home = () => {
       usernames: [], emails: []
     })
     try {
-      const res = await axios.get("http://localhost:8000/get-existing-users")
+      const res = await axios.get("https://project-expenses-app.onrender.com/get-existing-users")
       const data = res.data
       for (let i in data){
         existingUsers.usernames.push(data[i].username)
@@ -88,7 +88,19 @@ const Home = () => {
   }
 // Register //
   const setRegistration = (e) => {
-    setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
+      setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const setUsernameFiltering = (e) => {
+    //Filter out symbols //
+    const re = /^[A-Za-z]+$/
+    if (re.test(e.target.value)){
+      setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
+    } else {    
+      statusCodeHandler(101)
+      setRegister(prev => ({...prev}))
+    }
+    
   }
 
   const statusCodeHandler = (statusCode) => {
@@ -97,25 +109,25 @@ const Home = () => {
         setStatusCode("Username Already Exists")
         setTimeout(()=> {
           setStatusCode(null)
-        }, 5000)
+        }, 3000)
         break
       case 502:
         setStatusCode("Email is Alreading in use")
         setTimeout(()=> {
           setStatusCode(null)
-        }, 5000)
+        }, 3000)
         break
       case 401:
         setStatusCode("Username must be between 6 and 15 characters long")
         setTimeout(()=> {
           setStatusCode(null)
-        }, 5000)
+        }, 3000)
         break
       case 402:
         setStatusCode("Password must contain at least 8 characters")
         setTimeout(()=> {
           setStatusCode(null)
-        }, 5000)
+        }, 3000)
       
         break;
       case 201:
@@ -123,10 +135,15 @@ const Home = () => {
         setTimeout(()=> {
           setStatusCode(null)
           navigate(0)
-        }, 5000)
+        }, 3000)
       
         break;
-    
+      case 101:
+        setStatusCode("Only Alphabetical Characters Aloud")
+        setTimeout(()=> {
+          setStatusCode(null)
+        }, 3000)
+        break;
       default:
         break;
     }
@@ -144,7 +161,7 @@ const Home = () => {
       return statusCodeHandler(502)
     }
     try {
-      await axios.post('http://localhost:8000/register', 
+      await axios.post('https://project-expenses-app.onrender.com/register', 
       register)
       statusCodeHandler(201)
       auth.loginAction(register)
@@ -214,19 +231,19 @@ const Home = () => {
                   <Form.Label>
                     Username
                   </Form.Label>
-                  <Form.Control required name="username" type="text" onChange={setRegistration}/>
+                  <Form.Control required name="username" value={register.username}type="text" onChange={setUsernameFiltering}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
                     Email
                   </Form.Label>
-                  <Form.Control required name="email" type="email" onChange={setRegistration}/>
+                  <Form.Control required name="email" value={register.email}type="email" onChange={setRegistration}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
                     Password
                   </Form.Label>
-                  <Form.Control required name="password" type="password" onChange={setRegistration}/>
+                  <Form.Control required name="password" value={register.password}type="password" onChange={setRegistration}/>
                 </Form.Group>
                     <Button className="secondary"type="submit">Register</Button>
               </Form>
