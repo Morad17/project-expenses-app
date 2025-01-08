@@ -90,17 +90,16 @@ const Home = () => {
       setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
-  const setUsernameFiltering = (e) => {
-    //Filter out symbols //
-    const re = /^[A-Za-z]+$/
-    if (re.test(e.target.value)){
-      setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
-    } else {    
-      statusCodeHandler(101)
-      setRegister(prev => ({...prev}))
-    }
-    
-  }
+  // const setUsernameFiltering = (e) => {
+  //   //Filter out symbols //
+  //   const re = /^[A-Za-z]+$/
+  //   if (re.test(e.target.value)){
+  //     setRegister(prev => ({...prev, [e.target.name]: e.target.value}))
+  //   } else {    
+  //     statusCodeHandler(101)
+  //     setRegister(prev => ({...prev}))
+  //   }
+  // }
 
   const statusCodeHandler = (statusCode) => {
     switch (statusCode) {
@@ -230,7 +229,7 @@ const Home = () => {
                   <Form.Label>
                     Username
                   </Form.Label>
-                  <Form.Control required name="username" value={register.username}type="text" onChange={setUsernameFiltering}/>
+                  <Form.Control required name="username" value={register.username}pattern="[A-Za-z0-9]" title="please use only alphabet and numberical characters"type="text" onChange={setRegistration}/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
